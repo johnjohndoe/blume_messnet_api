@@ -8,26 +8,31 @@ configure do
 end
 
 NO_DATA_RESPONSE = "No data available."
+NULL_VALUE_REPLACEMENT = 66666
+
+def replace_null_value(value)
+    value.nil? ? NULL_VALUE_REPLACEMENT : value
+end
 
 def prepare_for_export(sensor_data)
     converted_data = sensor_data.asc(:date).map do |e|
         {
             sensor_id: e.sensor.nil? ? :null : e.sensor.sensor_id,
             date: e.date,
-            partikelPM10Mittel: e.partikelPM10Mittel,
-            partikelPM10Ueberschreitungen: e.partikelPM10Ueberschreitungen,
-            russMittel: e.russMittel,
-            russMax3h: e.russMax3h,
-            stickstoffdioxidMittel: e.stickstoffdioxidMittel,
-            stickstoffdioxidMax1h: e.stickstoffdioxidMax1h,
-            benzolMittel: e.benzolMittel,
-            benzolMax1h: e.benzolMax1h,
-            kohlenmonoxidMittel: e.kohlenmonoxidMittel,
-            kohlenmonoxidMax8hMittel: e.kohlenmonoxidMax8hMittel,
-            ozonMax1h: e.ozonMax1h,
-            ozonMax8hMittel: e.ozonMax8hMittel,
-            schwefeldioxidMittel: e.schwefeldioxidMittel,
-            schwefeldioxidMax1h: e.schwefeldioxidMax1h
+            partikelPM10Mittel: replace_null_value(e.partikelPM10Mittel),
+            partikelPM10Ueberschreitungen: replace_null_value(e.partikelPM10Ueberschreitungen),
+            russMittel: replace_null_value(e.russMittel),
+            russMax3h: replace_null_value(e.russMax3h),
+            stickstoffdioxidMittel: replace_null_value(e.stickstoffdioxidMittel),
+            stickstoffdioxidMax1h: replace_null_value(e.stickstoffdioxidMax1h),
+            benzolMittel: replace_null_value(e.benzolMittel),
+            benzolMax1h: replace_null_value(e.benzolMax1h),
+            kohlenmonoxidMittel: replace_null_value(e.kohlenmonoxidMittel),
+            kohlenmonoxidMax8hMittel: replace_null_value(e.kohlenmonoxidMax8hMittel),
+            ozonMax1h: replace_null_value(e.ozonMax1h),
+            ozonMax8hMittel: replace_null_value(e.ozonMax8hMittel),
+            schwefeldioxidMittel: replace_null_value(e.schwefeldioxidMittel),
+            schwefeldioxidMax1h: replace_null_value(e.schwefeldioxidMax1h)
         }
     end
     converted_data
