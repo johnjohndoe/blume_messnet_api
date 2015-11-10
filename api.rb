@@ -20,7 +20,7 @@ def prepare_for_export(sensor_data)
             sensor_id: e.sensor.nil? ? :null : e.sensor.sensor_id,
             date: e.date,
             partikelPM10Mittel: replace_null_value(e.partikelPM10Mittel),
-            partikelPM10Ueberschreitungen: replace_null_value(e.partikelPM10Ueberschreitungen),
+            # partikelPM10Ueberschreitungen: replace_null_value(e.partikelPM10Ueberschreitungen),
             russMittel: replace_null_value(e.russMittel),
             russMax3h: replace_null_value(e.russMax3h),
             stickstoffdioxidMittel: replace_null_value(e.stickstoffdioxidMittel),
